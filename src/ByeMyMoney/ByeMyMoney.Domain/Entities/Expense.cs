@@ -8,11 +8,12 @@ namespace ByeMyMoney.Domain.Entities
 {
     public class Expense: Entity
     {
-        public Expense(Description description, Favored favored, Money value)
+        public Expense(Accountant owner, Description description, Favored favored, Money value)
         {
+            Owner = owner;
             Update(description, favored, value);
             State = EExpenseState.Opened;
-            CreationDate = DateTime.Now;
+            CreatedDate = DateTime.Now;
             PaidDate = null;
         }
 
@@ -23,13 +24,8 @@ namespace ByeMyMoney.Domain.Entities
         public string Number { get; private set; }
         public EExpenseState State { get; private set; }
         public Money Value { get; private set; }
-        public DateTime CreationDate { get; private set; }
+        public DateTime CreatedDate { get; private set; }
         public DateTime? PaidDate { get; private set; }
-
-        public void SetOwner(Accountant owner)
-        {
-            Owner = owner;
-        }
 
         public void Update(Description description, Favored favored, Money value)
         {

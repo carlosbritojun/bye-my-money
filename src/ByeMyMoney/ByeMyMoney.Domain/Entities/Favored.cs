@@ -1,0 +1,27 @@
+﻿using ByeMyMoney.Domain.ValueObjects;
+using ByeMyMoney.Shared.Models;
+
+namespace ByeMyMoney.Domain.Entities
+{
+    public class Favored: Entity
+    {
+        public Favored(Name name, FavoredType type)
+        {
+            Update(name, type);
+        }
+
+        public Name Name { get; private set; }
+        public FavoredType Type { get; private set; }
+
+        public void Update(Name name, FavoredType type)
+        {
+            AddNotifications(name);
+            if (type == null) AddNotification("type", "Tipo de favorecido não informado");
+
+            if (Invalid) return;
+
+            Name = name;
+            Type = type;
+        }
+    }
+}

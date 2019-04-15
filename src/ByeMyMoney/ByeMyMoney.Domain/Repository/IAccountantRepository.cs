@@ -9,7 +9,7 @@ namespace ByeMyMoney.Domain.Repository
     {
         void Create(Accountant entity);
         void Update(Accountant entity);
-        void Delete(Guid id);
+        void Delete(Accountant entity);
 
         Accountant Get(Guid id);
         Accountant GetByEmail(string email);

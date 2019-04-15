@@ -5,6 +5,7 @@ using ByeMyMoney.Domain.ValueObjects;
 using ByeMyMoney.Shared.Commands;
 using ByeMyMoney.Shared.Transactions;
 using Flunt.Notifications;
+using System;
 using System.Threading.Tasks;
 
 namespace ByeMyMoney.Domain.Commands.ExpenseCommands.Handlers
@@ -34,10 +35,11 @@ namespace ByeMyMoney.Domain.Commands.ExpenseCommands.Handlers
         public Task<bool> Handle(RegisterNewExpenseCommand command)
         {
             var entity = new Expense(
-                    _accountantRepository.Get(command.Owner),
-                    new Description(command.Description),
-                    _favoredRepository.Get(command.Favored),
-                    new Money(command.Value)
+                  Guid.NewGuid(),
+                  _accountantRepository.Get(command.Owner),
+                  new Description(command.Description),
+                  _favoredRepository.Get(command.Favored),
+                  new Money(command.Value)
                 );
 
             AddNotifications(entity);

@@ -1,12 +1,14 @@
 ﻿using ByeMyMoney.Domain.ValueObjects;
 using ByeMyMoney.Shared.Models;
 using Flunt.Validations;
+using System;
 
 namespace ByeMyMoney.Domain.Entities
 {
     public class BankAccount: Entity
     {
-        public BankAccount(Name bankName, string number)
+        public BankAccount(Guid id, Name bankName, string number)
+            :base(id)
         {
             Update(bankName, number);
         }
@@ -24,7 +26,7 @@ namespace ByeMyMoney.Domain.Entities
         {
             AddNotifications(bankName, 
                 new Contract()
-                    .IsNullOrEmpty(Number, "número", "Número de conta corrente não informado")
+                    .IsNotNullOrEmpty(number, "número", "Número de conta corrente não informado")
                 );
 
             if (Invalid) return;

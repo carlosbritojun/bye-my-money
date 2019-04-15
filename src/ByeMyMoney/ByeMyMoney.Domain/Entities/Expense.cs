@@ -8,7 +8,8 @@ namespace ByeMyMoney.Domain.Entities
 {
     public class Expense: Entity
     {
-        public Expense(Accountant owner, Description description, Favored favored, Money value)
+        public Expense(Guid id, Accountant owner, Description description, Favored favored, Money value)
+            :base(id)
         {
             Owner = owner;
             Update(description, favored, value);

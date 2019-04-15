@@ -1,12 +1,15 @@
 ﻿using ByeMyMoney.Domain.ValueObjects;
 using ByeMyMoney.Shared.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ByeMyMoney.Domain.Entities
 {
     public class Accountant: Entity
     {
-        public Accountant(Name name, User user)
+        public Accountant(Guid id, Name name, User user)
+            : base(id)
         {
             Name = name;
             User = user;
@@ -29,12 +32,8 @@ namespace ByeMyMoney.Domain.Entities
 
         public void ChangeCredentials(Email email, string password, string confirmPassword)
         {
-            var newUser = new User(email, password, confirmPassword);
-
-            AddNotifications(newUser);
-            if (Invalid) return;
-
-            User = newUser;
+            User.Update(email, password, confirmPassword);
+            AddNotifications(User);
         }
 
         public void AddAccount(BankAccount account)
@@ -43,6 +42,11 @@ namespace ByeMyMoney.Domain.Entities
             if (Invalid) return;
 
             this.Accounts.Add(account);
+        }
+
+        public BankAccount GetAccount(Guid id)
+        {
+            return Accounts.FirstOrDefault(n => n.Id == id);
         }
 
         public void RemoveAccount(BankAccount account)

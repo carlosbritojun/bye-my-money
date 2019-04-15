@@ -2,26 +2,43 @@
 using ByeMyMoney.Shared.Helpers;
 using ByeMyMoney.Shared.Models;
 using Flunt.Validations;
+using System;
 
 namespace ByeMyMoney.Domain.Entities
 {
     public class User: Entity
     {
-        public User(Email email, string password, string confirmPassword)
+        public User(Guid id, Email email, string password, string confirmPassword)
+            :base(id)
+        {
+            Update(email, password, confirmPassword);
+
+            //Email = email;
+            //Password = EncryptPassword(password);
+
+            //AddNotifications(Email);
+
+            //if (Valid)
+            //    AddNotifications(new Contract()
+            //        .IsTrue(Password == EncryptPassword(confirmPassword), "password", "As senhas não coincidem")
+            //    );
+        }
+
+        public Email Email { get; private set; }
+        public string Password { get; private set; }
+
+        public void Update(Email email, string password, string confirmPassword)
         {
             Email = email;
             Password = EncryptPassword(password);
 
-            AddNotifications(Email);
+            AddNotifications(email);
 
             if (Valid)
                 AddNotifications(new Contract()
                     .IsTrue(Password == EncryptPassword(confirmPassword), "password", "As senhas não coincidem")
                 );
         }
-
-        public Email Email { get; private set; }
-        public string Password { get; private set; }
 
         public bool Authenticate(Email email, string password)
         {

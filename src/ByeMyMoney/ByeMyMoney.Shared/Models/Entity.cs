@@ -5,7 +5,12 @@ namespace ByeMyMoney.Shared.Models
 {
     public abstract class Entity: Notifiable
     {
-        public Entity() => Id = Guid.NewGuid();
+        protected Entity(Guid id)
+        {
+            Id = id;
+        }
+
+        //public Entity() => Id = Guid.NewGuid();
 
         public Guid Id { get; protected set; }
         public static bool operator !=(Entity a, Entity b) => !(a == b);

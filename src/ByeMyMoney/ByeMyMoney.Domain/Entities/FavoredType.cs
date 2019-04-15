@@ -1,11 +1,13 @@
 ﻿using ByeMyMoney.Domain.ValueObjects;
 using ByeMyMoney.Shared.Models;
+using System;
 
 namespace ByeMyMoney.Domain.Entities
 {
     public class FavoredType: Entity
     {
-        public FavoredType(Description description)
+        public FavoredType(Guid id, Description description)
+            :base(id)
         {
             Update(description);
         }

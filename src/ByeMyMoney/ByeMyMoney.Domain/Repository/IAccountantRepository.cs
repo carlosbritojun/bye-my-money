@@ -1,4 +1,5 @@
-﻿using ByeMyMoney.Domain.Entities;
+﻿using ByeMyMoney.Domain.Commands.AccountantCommands.Results;
+using ByeMyMoney.Domain.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -12,6 +13,6 @@ namespace ByeMyMoney.Domain.Repository
 
         Accountant Get(Guid id);
         Accountant GetByEmail(string email);
-        IList<Accountant> Get();
+        IEnumerable<GetAccountantListCommandResult> Get();
     }
 }

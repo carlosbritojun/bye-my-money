@@ -1,7 +1,7 @@
 ﻿using ByeMyMoney.Domain.ValueObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ByeMyMoney.Tests
+namespace ByeMyMoney.Domain.Tests.Entities
 {
     [TestClass]
     public class MoneyTests

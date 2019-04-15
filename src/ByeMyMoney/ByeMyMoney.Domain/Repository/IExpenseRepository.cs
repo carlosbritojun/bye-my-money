@@ -12,6 +12,6 @@ namespace ByeMyMoney.Domain.Repository
         void Delete(Guid id);
 
         Expense Get(Guid id);
-        IList<GetExpenseListCommandResult> GetByFilter();
+        IEnumerable<GetExpenseListCommandResult> Get();
     }
 }

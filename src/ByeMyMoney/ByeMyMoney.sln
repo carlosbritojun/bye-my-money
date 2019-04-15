@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByeMyMoney.Domain", "ByeMyMoney.Domain\ByeMyMoney.Domain.csproj", "{EA3BD63E-BE5D-4690-A1BC-69B7D08FD39D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByeMyMoney.Domain", "ByeMyMoney.Domain\ByeMyMoney.Domain.csproj", "{EA3BD63E-BE5D-4690-A1BC-69B7D08FD39D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByeMyMoney.Shared", "ByeMyMoney.Shared\ByeMyMoney.Shared.csproj", "{E76E781C-0715-4EAC-8C96-4727052891D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByeMyMoney.Shared", "ByeMyMoney.Shared\ByeMyMoney.Shared.csproj", "{E76E781C-0715-4EAC-8C96-4727052891D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByeMyMoney.Tests", "ByeMyMoney.Tests\ByeMyMoney.Tests.csproj", "{8E0F52B4-6C8B-4F00-B7A9-AF347DEAD438}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByeMyMoney.Domain.Tests", "ByeMyMoney.Tests\ByeMyMoney.Domain.Tests.csproj", "{8E0F52B4-6C8B-4F00-B7A9-AF347DEAD438}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,6 +2,7 @@
 using ByeMyMoney.Shared.Models;
 using Flunt.Validations;
 using System;
+using System.Collections.Generic;
 
 namespace ByeMyMoney.Domain.Entities
 {
@@ -11,11 +12,13 @@ namespace ByeMyMoney.Domain.Entities
             :base(id)
         {
             Update(bankName, number);
+            Expenses = new List<Expense>();
         }
 
         public Accountant Owner { get; private set; }
         public Name BankName { get; private set; }
         public string Number { get; private set; }
+        public IList<Expense> Expenses { get; set; }
 
         public void SetOwner(Accountant owner)
         {

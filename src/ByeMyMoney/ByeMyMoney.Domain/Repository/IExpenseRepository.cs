@@ -9,9 +9,11 @@ namespace ByeMyMoney.Domain.Repository
     {
         void Create(Expense entity);
         void Update(Expense entity);
-        void Delete(Guid id);
+        void Delete(Expense entit);
 
         Expense Get(Guid id);
-        IEnumerable<GetExpenseListCommandResult> Get();
+
+        GetExpenseCommandResult GetCommandResult(Guid id);
+        IEnumerable<GetExpenseListCommandResult> GetListCommandResult(Guid account);
     }
 }

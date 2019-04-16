@@ -41,6 +41,7 @@ namespace ByeMyMoney.Domain.Entities
             AddNotifications(account);
             if (Invalid) return;
 
+            account.SetOwner(this);
             this.Accounts.Add(account);
         }
 
@@ -51,6 +52,11 @@ namespace ByeMyMoney.Domain.Entities
 
         public void RemoveAccount(BankAccount account)
         {
+            if (account.Expenses.Any())
+                AddNotification("conta-corrrente", "Exclusão não permitida! A conta-corrente possui despesas vinculadas");
+
+            if (Invalid) return;
+
             this.Accounts.Remove(account);
         }
     }

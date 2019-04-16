@@ -8,17 +8,17 @@ namespace ByeMyMoney.Domain.Entities
 {
     public class Expense: Entity
     {
-        public Expense(Guid id, Accountant owner, Description description, Favored favored, Money value)
+        public Expense(Guid id, BankAccount account, Description description, Favored favored, Money value)
             :base(id)
         {
-            Owner = owner;
+            Account = account;
             Update(description, favored, value);
             State = EExpenseState.Opened;
             CreatedDate = DateTime.Now;
             PaidDate = null;
         }
 
-        public Accountant Owner { get; private set; }
+        public BankAccount Account { get; private set; }
         public Description Description { get; private set; }
         public Favored Favored { get; private set; }
         public PaymentType Type { get; private set; }

@@ -13,6 +13,8 @@ namespace ByeMyMoney.Domain.Repository
 
         Accountant Get(Guid id);
         Accountant GetByEmail(string email);
-        IEnumerable<GetAccountantListCommandResult> Get();
+
+        GetAccountantCommandResult GetCommandResult(Guid id);
+        IEnumerable<GetAccountantListCommandResult> GetListCommandResult();
     }
 }

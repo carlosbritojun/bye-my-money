@@ -3,19 +3,17 @@ using System;
 
 namespace ByeMyMoney.Domain.Commands.AccountantCommands.Results
 {
-    public class GetAccountantListCommandResult: ICommandResult
+    public class GetAccountantCommandResult: ICommandResult
     {
-        public GetAccountantListCommandResult(Guid id, string name, string email, int bankAccounts)
+        public GetAccountantCommandResult(Guid id, string name, string email)
         {
             Id = id;
             Name = name;
             Email = email;
-            BankAccounts = bankAccounts;
         }
 
         public Guid Id { get; }
         public string Name { get; }
         public string Email { get; }
-        public int BankAccounts { get; }
     }
 }

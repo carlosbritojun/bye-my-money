@@ -1,4 +1,5 @@
-﻿using ByeMyMoney.Domain.Entities;
+﻿using ByeMyMoney.Domain.Commands.FavoredCommands.Results;
+using ByeMyMoney.Domain.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -8,9 +9,11 @@ namespace ByeMyMoney.Domain.Repository
     {
         void Create(Favored entity);
         void Update(Favored entity);
-        void Delete(Guid id);
+        void Delete(Favored entity);
 
         Favored Get(Guid id);
-        IList<Favored> Get();
+
+        GetFavoredCommandResult GetCommandResult(Guid id);
+        IEnumerable<GetFavoredListCommandResult> GetListCommandResult();
     }
 }

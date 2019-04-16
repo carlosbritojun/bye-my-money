@@ -18,28 +18,42 @@ namespace ByeMyMoney.Domain.Commands.ExpenseCommands.Handlers
         ICommandHandler<CancelPaymentExpenseCommand>
     {
         private readonly IUnitOfWork _uow;
-        private readonly IExpenseRepository _expenseRepository;
         private readonly IAccountantRepository _accountantRepository;
+        private readonly IExpenseRepository _expenseRepository;
         private readonly IFavoredRepository _favoredRepository;
         private readonly IPaymentTypeRepository _paymentTypeRepository;
 
-        public ExpenseCommandHandler(IUnitOfWork uow,  IExpenseRepository expenseRepository, IAccountantRepository accountantRepository, IFavoredRepository favoredRepository, IPaymentTypeRepository paymentRepository)
+        public ExpenseCommandHandler(IUnitOfWork uow, IAccountantRepository accountantRepository, IExpenseRepository expenseRepository, IFavoredRepository favoredRepository, IPaymentTypeRepository paymentRepository)
         {
             _uow = uow;
-            _expenseRepository = expenseRepository;
             _accountantRepository = accountantRepository;
+            _expenseRepository = expenseRepository;
             _favoredRepository = favoredRepository;
             _paymentTypeRepository = paymentRepository;
         }
 
         public Task<bool> Handle(RegisterNewExpenseCommand command)
         {
+            var owner = _accountantRepository.Get(command.Owner);
+            if (owner == null)
+            {
+                AddNotification("correntista", "Correntista não localizado");
+                return Task.FromResult(false);
+            }
+
+            var bankAccount = owner.GetAccount(command.Account);
+            if (bankAccount == null)
+            {
+                AddNotification("conta-corrente", "Conta corrente não localizada");
+                return Task.FromResult(false);
+            }
+
             var entity = new Expense(
-                  Guid.NewGuid(),
-                  _accountantRepository.Get(command.Owner),
-                  new Description(command.Description),
-                  _favoredRepository.Get(command.Favored),
-                  new Money(command.Value)
+                    Guid.NewGuid(),
+                    bankAccount,
+                    new Description(command.Description),
+                    _favoredRepository.Get(command.Favored),
+                    new Money(command.Value)
                 );
 
             AddNotifications(entity);
@@ -55,6 +69,11 @@ namespace ByeMyMoney.Domain.Commands.ExpenseCommands.Handlers
         public Task<bool> Handle(UpdateExpenseCommand command)
         {
             var entity = _expenseRepository.Get(command.Id);
+            if (entity == null)
+            {
+                AddNotification("despesa", "Despesa não localizada");
+                return Task.FromResult(false);
+            }
 
             entity.Update(
                     new Description(command.Description),
@@ -74,14 +93,27 @@ namespace ByeMyMoney.Domain.Commands.ExpenseCommands.Handlers
 
         public Task<bool> Handle(RemoveExpenseCommand command)
         {
-            _expenseRepository.Delete(command.Id);
+            var entity = _expenseRepository.Get(command.Id);
+            if (entity == null)
+            {
+                AddNotification("despesa", "Despesa não localizada");
+                return Task.FromResult(false);
+            }
+
+            _expenseRepository.Delete(entity);
             _uow.Commit();
+
             return Task.FromResult(true);
         }
 
         public Task<bool> Handle(PaymentExpenseCommand command)
         {
             var entity = _expenseRepository.Get(command.Id);
+            if (entity == null)
+            {
+                AddNotification("despesa", "Despesa não localizada");
+                return Task.FromResult(false);
+            }
 
             entity.Pay(
                     _paymentTypeRepository.Get(command.PaymentType),
@@ -101,6 +133,11 @@ namespace ByeMyMoney.Domain.Commands.ExpenseCommands.Handlers
         public Task<bool> Handle(CancelPaymentExpenseCommand command)
         {
             var entity = _expenseRepository.Get(command.Id);
+            if (entity == null)
+            {
+                AddNotification("despesa", "Despesa não localizada");
+                return Task.FromResult(false);
+            }
 
             entity.CancelPayment();
 

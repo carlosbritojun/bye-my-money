@@ -1,4 +1,5 @@
-﻿using ByeMyMoney.Domain.Entities;
+﻿using ByeMyMoney.Domain.Commands.PaymentTypeCommands.Results;
+using ByeMyMoney.Domain.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -11,6 +12,8 @@ namespace ByeMyMoney.Domain.Repository
         void Delete(Guid id);
 
         PaymentType Get(Guid id);
-        IList<PaymentType> Get();
+
+        GetPaymentTypeCommandResult GetCommandResult();
+        IEnumerable<GetPaymentTypeListCommandResult> GetListCommandResult();
     }
 }

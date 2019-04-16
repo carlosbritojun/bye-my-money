@@ -9,7 +9,7 @@ using Moq;
 using System;
 using System.Linq;
 
-namespace ByeMyMoney.Domain.Tests.Commands
+namespace ByeMyMoney.Domain.Tests.CommandHandlers
 {
     [TestClass]
     public class AccountantCommandHandlerTests

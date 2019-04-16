@@ -12,4 +12,9 @@
     <ProjectReference Include="..\ByeMyMoney.Shared\ByeMyMoney.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\PaymentTypeCommands\Handlers\" />
+    <Folder Include="Commands\PaymentTypeCommands\Inputs\" />
+  </ItemGroup>
+
 </Project>
